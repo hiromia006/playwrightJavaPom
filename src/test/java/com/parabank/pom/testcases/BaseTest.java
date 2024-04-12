@@ -8,11 +8,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.Properties;
 
 public abstract class BaseTest {
 
-    Page page;
+    static Page page;
     protected Properties prop;
 
 
@@ -68,4 +69,18 @@ public abstract class BaseTest {
         page.context().browser().close();
 
     }
+
+    public static String takeScreenshot() {
+        String path = System.getProperty("user.dir") + "/screenshot/" + System.currentTimeMillis() + ".png";
+        //getPage().screenshot(new Page.ScreenshotOptions().setPath(Paths.get(path)).setFullPage(true));
+
+        byte[] buffer = page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get(path)).setFullPage(true));
+        String base64Path = Base64.getEncoder().encodeToString(buffer);
+
+        return base64Path;
+    }
+
+//    public  Page getPage() {
+//        return page;
+//    }
 }
