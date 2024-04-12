@@ -1,7 +1,9 @@
 package com.parabank.pom.testcases;
 
 import com.microsoft.playwright.*;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
 import java.io.FileInputStream;
@@ -13,7 +15,7 @@ import java.util.Properties;
 
 public abstract class BaseTest {
 
-    static Page page;
+    static Page page=null;
     protected Properties prop;
 
 
@@ -29,7 +31,7 @@ public abstract class BaseTest {
         }
     }
 
-    @BeforeTest
+    @BeforeMethod
     public void initBrowser() {
         String browserName = prop.getProperty("browserName");
         Playwright playwright;
@@ -59,7 +61,7 @@ public abstract class BaseTest {
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void tearDown() {
         page.screenshot(
                 new Page.ScreenshotOptions()
