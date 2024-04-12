@@ -22,7 +22,7 @@ public class LoginPage extends BasePage {
 
     public OverviewPage clickLoginBtn() {
         page.locator("//input[@class='button']").click();
-//        General.waitForDomStable();
+        General.waitForDomStable();
         return new OverviewPage(page);
     }
 
